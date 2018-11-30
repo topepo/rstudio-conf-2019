@@ -1,3 +1,8 @@
+# Package installs -------------------------------------------------------------
+
+# If you have any issues with the installs, please report them at:
+# https://community.rstudio.com/t/information-for-the-2019-applied-machine-learning-workshop/19087/2
+
 from_cran <- 
   c("AmesHousing", "caret", "doParallel", "e1071", "earth", "glmnet", "ipred", 
     "klaR", "kknn", "pROC", "rpart", "sessioninfo", "tidymodels")
