@@ -4,8 +4,9 @@
 # https://community.rstudio.com/t/information-for-the-2019-applied-machine-learning-workshop/19087/2
 
 from_cran <- 
-  c("AmesHousing", "caret", "doParallel", "e1071", "earth", "ggrepel" , "glmnet", 
-    "ipred", "klaR", "kknn", "pROC", "rpart", "sessioninfo", "tidymodels")
+  c("AmesHousing", "broom", "caret", "dials", "doParallel", "e1071", "earth", 
+    "ggrepel", "glmnet", "ipred", "klaR", "kknn", "pROC", "rpart", 
+    "sessioninfo", "tidymodels")
 
 install.packages(from_cran, repos = "http://cran.rstudio.com")
 
