@@ -14,7 +14,7 @@ install.packages(from_cran, repos = "http://cran.rstudio.com")
 for (pkg in from_cran)
   library(pkg, character.only = TRUE)
 
-session_info()
+sessioninfo::session_info()
 
 if (!interactive())
   q("no")
