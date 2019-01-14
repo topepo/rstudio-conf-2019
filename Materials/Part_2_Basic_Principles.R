@@ -349,7 +349,7 @@ fit_one_spec_one_split <- function(spec, split) {
 }
 
 fit_one_spec_one_split(
-  spec_grid$specs[[6]],  # Six neighbors
+  param_grid$specs[[6]],  # Six neighbors
   cv_splits$splits[[9]]  # Ninth Fold
 )
 
@@ -368,7 +368,7 @@ fit_all_specs_one_split <- function(split, spec_df) {
 
 fit_all_specs_one_split(
   cv_splits$splits[[1]], 
-  spec_grid
+  param_grid
 ) %>%
   print(n = 5)
 
@@ -390,7 +390,7 @@ fit_all_specs_all_splits <- function(split_df, spec_df) {
 
 resampled_grid <- fit_all_specs_all_splits(
   split_df = cv_splits, 
-  spec_df = spec_grid
+  spec_df = param_grid
 )
 
 resampled_grid %>% slice(1:6)
@@ -445,7 +445,7 @@ best_neighbor_value <-
   pull(neighbors)
 
 best_spec <-
-  spec_grid %>%
+  param_grid %>%
   filter(neighbors == best_neighbor_value) %>%
   pull(specs) %>%
   .[[1]]
