@@ -14,6 +14,7 @@ library(rstanarm)
 library(probably)
 library(emo)
 
+
 #  Slide 10 ------------------------------------------------------
 
 make_fit <- function(recipe, ...) {
