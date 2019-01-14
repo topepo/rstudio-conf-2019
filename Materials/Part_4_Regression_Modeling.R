@@ -238,6 +238,15 @@ mars_mod <- train(
   trControl = ctrl
 )
 
+# Parallel Processing Code ---------------------------------------
+
+parallel::detectCores()
+
+# library(doParallel)
+# cl <- makePSOCKcluster(parallel::detectCores() - 2)
+# registerDoParallel(cl)
+
+
 # Slide 46 -------------------------------------------------------
 
 ggplot(mars_mod) + theme(legend.position = "top")
