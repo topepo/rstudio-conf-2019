@@ -140,8 +140,7 @@ ggplot(
   geom_point(alpha = 0.4) +
   scale_x_log10() + 
   scale_y_continuous(
-    breaks = price_breaks, 
-    trans = "log10"
+    breaks = price_breaks
   ) +
   geom_smooth(method = "loess")
 
@@ -156,8 +155,7 @@ ggplot(
   ) + 
   geom_point(alpha = 0.4) +
   scale_y_continuous(
-    breaks = price_breaks, 
-    trans = "log10"
+    breaks = price_breaks
   ) + 
   facet_wrap(~ Central_Air, nrow = 2) +
   geom_smooth(method = "rlm") 

@@ -31,7 +31,7 @@ library(tidymodels)
 ```
 
 ```
-## ── Attaching packages ─────────────────────────────────────────────────── tidymodels 0.0.2 ──
+## ── Attaching packages ─────────────────────────────── tidymodels 0.0.2 ──
 ```
 
 ```
@@ -43,7 +43,7 @@ library(tidymodels)
 ```
 
 ```
-## ── Conflicts ────────────────────────────────────────────────────── tidymodels_conflicts() ──
+## ── Conflicts ────────────────────────────────── tidymodels_conflicts() ──
 ## ✖ purrr::discard()       masks scales::discard()
 ## ✖ rsample::fill()        masks tidyr::fill()
 ## ✖ dplyr::filter()        masks stats::filter()
@@ -404,12 +404,10 @@ names(ames_test_dummies)
 ```
 
 ```
-##  [1] "Sale_Price"                      "Longitude"                      
-##  [3] "Latitude"                        "Neighborhood_College_Creek"     
-##  [5] "Neighborhood_Old_Town"           "Neighborhood_Edwards"           
-##  [7] "Neighborhood_Somerset"           "Neighborhood_Northridge_Heights"
-##  [9] "Neighborhood_Gilbert"            "Neighborhood_Sawyer"            
-## [11] "Neighborhood_other"
+##  [1] "Sale_Price"                      "Longitude"                       "Latitude"                       
+##  [4] "Neighborhood_College_Creek"      "Neighborhood_Old_Town"           "Neighborhood_Edwards"           
+##  [7] "Neighborhood_Somerset"           "Neighborhood_Northridge_Heights" "Neighborhood_Gilbert"           
+## [10] "Neighborhood_Sawyer"             "Neighborhood_other"
 ```
 
 If `retain = TRUE`, the training set does not need to be "rebaked". The `juice()` function can return the processed version of the training data.
@@ -706,8 +704,7 @@ ggplot(
   geom_point(alpha = 0.4) +
   scale_x_log10() + 
   scale_y_continuous(
-    breaks = price_breaks, 
-    trans = "log10"
+    breaks = price_breaks
   ) +
   geom_smooth(method = "loess")
 ```
@@ -736,8 +733,7 @@ ggplot(
   ) + 
   geom_point(alpha = 0.4) +
   scale_y_continuous(
-    breaks = price_breaks, 
-    trans = "log10"
+    breaks = price_breaks
   ) + 
   facet_wrap(~ Central_Air, nrow = 2) +
   geom_smooth(method = "rlm") 
@@ -958,10 +954,9 @@ glance(cv_splits$models[[1]]$fit)
 
 ```
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared  sigma statistic p.value    df logLik    AIC    BIC deviance
-##       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-## 1     0.803         0.801 0.0796      319.       0    26  2211. -4368. -4217.     12.4
-## # … with 1 more variable: df.residual &lt;int&gt;
+##   r.squared adj.r.squared  sigma statistic p.value    df logLik    AIC    BIC deviance df.residual
+##       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+## 1     0.803         0.801 0.0796      319.       0    26  2211. -4368. -4217.     12.4        1951
 ```
 
 
