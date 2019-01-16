@@ -31,28 +31,28 @@ library(tidymodels)
 ```
 
 ```
-## ── Attaching packages ────────────────────────────────────────── tidymodels 0.0.2 ──
+## ── Attaching packages ─────────────────────────────────────────────────── tidymodels 0.0.2 ──
 ```
 
 ```
-## ✔ broom     0.5.0     ✔ purrr     0.2.5
-## ✔ dials     0.0.2     ✔ recipes   0.1.4
-## ✔ dplyr     0.7.8     ✔ rsample   0.0.3
-## ✔ infer     0.4.0     ✔ tibble    1.4.2
-## ✔ parsnip   0.0.1     ✔ yardstick 0.0.2
+## ✔ broom     0.5.0.9001      ✔ purrr     0.2.5.9000 
+## ✔ dials     0.0.2           ✔ recipes   0.1.4.9000 
+## ✔ dplyr     0.8.0.9000      ✔ rsample   0.0.3      
+## ✔ infer     0.4.0           ✔ tibble    1.4.99.9006
+## ✔ parsnip   0.0.1           ✔ yardstick 0.0.2
 ```
 
 ```
-## ── Conflicts ───────────────────────────────────────────── tidymodels_conflicts() ──
+## ── Conflicts ────────────────────────────────────────────────────── tidymodels_conflicts() ──
 ## ✖ purrr::discard()       masks scales::discard()
 ## ✖ rsample::fill()        masks tidyr::fill()
 ## ✖ dplyr::filter()        masks stats::filter()
+## ✖ dplyr::group_rows()    masks kableExtra::group_rows()
 ## ✖ dplyr::lag()           masks stats::lag()
 ## ✖ purrr::lift()          masks caret::lift()
 ## ✖ yardstick::precision() masks caret::precision()
 ## ✖ yardstick::recall()    masks caret::recall()
 ## ✖ recipes::step()        masks stats::step()
-## ✖ yardstick::tidy()      masks rsample::tidy(), recipes::tidy(), broom::tidy()
 ```
 ]
 
@@ -404,10 +404,12 @@ names(ames_test_dummies)
 ```
 
 ```
-##  [1] "Sale_Price"                      "Longitude"                       "Latitude"                       
-##  [4] "Neighborhood_College_Creek"      "Neighborhood_Old_Town"           "Neighborhood_Edwards"           
-##  [7] "Neighborhood_Somerset"           "Neighborhood_Northridge_Heights" "Neighborhood_Gilbert"           
-## [10] "Neighborhood_Sawyer"             "Neighborhood_other"
+##  [1] "Sale_Price"                      "Longitude"                      
+##  [3] "Latitude"                        "Neighborhood_College_Creek"     
+##  [5] "Neighborhood_Old_Town"           "Neighborhood_Edwards"           
+##  [7] "Neighborhood_Somerset"           "Neighborhood_Northridge_Heights"
+##  [9] "Neighborhood_Gilbert"            "Neighborhood_Sawyer"            
+## [11] "Neighborhood_other"
 ```
 
 If `retain = TRUE`, the training set does not need to be "rebaked". The `juice()` function can return the processed version of the training data.
@@ -615,7 +617,7 @@ bivariate_pca &lt;-
   step_center(all_predictors()) %&gt;%
   step_scale(all_predictors()) %&gt;%
   step_pca(all_predictors()) %&gt;%
-  prep(training = bivariate_data_test, verbose = FALSE)
+  prep(training = bivariate_data_train, verbose = FALSE)
 
 pca_test &lt;- bake(bivariate_pca, new_data = bivariate_data_test)
 
@@ -649,7 +651,7 @@ Recall that even after the Box-Cox transformation was applied to our previous ex
 
 After the transformation, the predictors were centered and scaled, then PCA was conducted. The plot on the right shows the results. 
 
-Since these two predictors are highly correlated, the first component captures 91.2% of the variation in the original data. However...
+Since these two predictors are highly correlated, the first component captures 91.7% of the variation in the original data. However...
 
 ...recall that PCA does not guarantee that the components are associated with the outcome. In this example, the _least important_ component has the association with the outcome.  
 ]
@@ -956,9 +958,10 @@ glance(cv_splits$models[[1]]$fit)
 
 ```
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared  sigma statistic p.value    df logLik    AIC    BIC deviance df.residual
-## *     &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
-## 1     0.803         0.801 0.0796      319.       0    26  2211. -4368. -4217.     12.4        1951
+##   r.squared adj.r.squared  sigma statistic p.value    df logLik    AIC    BIC deviance
+##       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+## 1     0.803         0.801 0.0796      319.       0    26  2211. -4368. -4217.     12.4
+## # … with 1 more variable: df.residual &lt;int&gt;
 ```
 
 
@@ -1149,19 +1152,30 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);
