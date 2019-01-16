@@ -116,7 +116,7 @@ bivariate_pca <-
   step_center(all_predictors()) %>%
   step_scale(all_predictors()) %>%
   step_pca(all_predictors()) %>%
-  prep(training = bivariate_data_test, verbose = FALSE)
+  prep(training = bivariate_data_train, verbose = FALSE)
 
 pca_test <- bake(bivariate_pca, new_data = bivariate_data_test)
 
